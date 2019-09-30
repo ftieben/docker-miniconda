@@ -1,0 +1,1 @@
+This image is basicly a clone of https://github.com/datarevenue-berlin/alpine-miniconda with updated versions
