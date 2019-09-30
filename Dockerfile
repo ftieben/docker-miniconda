@@ -64,10 +64,11 @@ RUN cd /tmp && \
     rm miniconda.sh && \
     $CONDA_DIR/bin/conda install --yes conda==$MINICONDA_VER
 
-RUN conda upgrade -y pip && \
-    conda config --add channels conda-forge && \
-    conda install -c conda-forge requests urllib3 && \
-    conda clean --all
+RUN cd /tmp && \
+    conda upgrade -y pip && \
+    conda config --add channels conda-forge 
+RUN conda install -c conda-forge requests urllib3 
+RUN conda clean --all
 
 USER root
 
