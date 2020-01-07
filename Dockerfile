@@ -1,7 +1,7 @@
 FROM alpine:latest
 
 LABEL maintainer="Florian Tieben <ftiebe@gmail.com>"
-LABEL version="4.7.10"
+LABEL version="4.7.12"
 
 # Inspired by :
 # * https://github.com/datarevenue-berlin/alpine-miniconda
@@ -43,10 +43,10 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 
 # Configure Miniconda
-ENV MINICONDA_VER 4.7.10
+ENV MINICONDA_VER 4.7.12
 ENV MINICONDA Miniconda3-$MINICONDA_VER-Linux-x86_64.sh
 ENV MINICONDA_URL https://repo.continuum.io/miniconda/$MINICONDA
-ENV MINICONDA_MD5_SUM 1c945f2b3335c7b2b15130b1b2dc5cf4
+ENV MINICONDA_MD5_SUM 0dba759b8ecfc8948f626fa18785e3d8
 
 # Create user with UID=1000 and in the 'users' group
 RUN adduser -s /bin/bash -u $CONTAINER_UID -D $CONTAINER_USER && \
