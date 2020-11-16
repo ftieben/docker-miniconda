@@ -1,7 +1,10 @@
 FROM alpine:latest
 
 LABEL maintainer="Florian Tieben <ftiebe@gmail.com>"
-LABEL version="4.7.12"
+LABEL version="4.8.3"
+LABEL CONDA_VERSION="4.8.3"
+LABEL PYTHON_VERSION="3.7"
+LABEL GLIBC_VERSION="2.32-r0"
 
 # Inspired by :
 # * https://github.com/datarevenue-berlin/alpine-miniconda
@@ -10,7 +13,7 @@ LABEL version="4.7.12"
 # * https://github.com/show0k/alpine-jupyter-docker
 
 # Configure glibc
-ENV GLIBC_VER 2.29-r0
+ENV GLIBC_VER 2.32-r0
 
 # Install glibc and useful packages
 RUN echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
@@ -43,10 +46,11 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 
 # Configure Miniconda
-ENV MINICONDA_VER 4.7.12
-ENV MINICONDA Miniconda3-$MINICONDA_VER-Linux-x86_64.sh
+ENV MINICONDA_VER 4.8.3
+ENV PYTHON_VERSION 37
+ENV MINICONDA Miniconda3-py${PYTHON_VERSION}_${MINICONDA_VER}-Linux-x86_64.sh
 ENV MINICONDA_URL https://repo.continuum.io/miniconda/$MINICONDA
-ENV MINICONDA_MD5_SUM 0dba759b8ecfc8948f626fa18785e3d8
+ENV MINICONDA_MD5_SUM 751786b92c00b1aeae3f017b781018df
 
 # Create user with UID=1000 and in the 'users' group
 RUN adduser -s /bin/bash -u $CONTAINER_UID -D $CONTAINER_USER && \
@@ -58,7 +62,7 @@ USER $CONTAINER_USER
 # Install conda
 RUN cd /tmp && \
     mkdir -p $CONDA_DIR && \
-    curl -L $MINICONDA_URL  -o miniconda.sh && \
+    curl -L $MINICONDA_URL  -o miniconda.sh  && \
     echo "$MINICONDA_MD5_SUM  miniconda.sh" | md5sum -c - && \
     /bin/bash miniconda.sh -f -b -p $CONDA_DIR && \
     rm miniconda.sh && \
