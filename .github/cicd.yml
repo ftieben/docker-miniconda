@@ -1,0 +1,8 @@
+name: Say hello!
+
+jobs:
+  build_latest:
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+      docker build .
