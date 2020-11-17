@@ -9,4 +9,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - run: | 
-        pwd && ls -lah && docker build . 
+        cd .. && pwd && ls -lah && docker build .
